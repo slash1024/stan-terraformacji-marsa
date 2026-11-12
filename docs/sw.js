@@ -1,5 +1,5 @@
 // Service worker — offline + aktualizacje. VERSION podstawia build.mjs przy każdym buildzie.
-const VERSION = '1.0.0+20261112-2212';
+const VERSION = '1.0.0+20261112-2217';
 const CACHE = 'tfm-' + VERSION;
 const ASSETS = [
   './',

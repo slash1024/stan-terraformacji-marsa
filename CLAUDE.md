@@ -67,6 +67,8 @@ Wszystkie zrobione w CSS, bez zmian w strukturze komponentów:
 1. Przyciski `+`/`−` miały na sztywno `#1a1208` (zasada „czarną czcionką"). Na ciemnych skórkach dawało to kontrast **1,03**. Teraz `var(--cream)` — intencja zasady zachowana, bo `--cream` to zawsze atrament czytelny na `--surface`.
 2. Brutalizmowy `#ff3b00` jako TEKST na bieli daje 3,57. Pomarańcz przyciemniony do `#cc2f00` (5,28 na bieli), a wypełnienia nim mają biały tekst, nie czarny (czarny dawałby 3,97).
 
+**Pozostałe ekrany** (wyniki, historia, statystyki, AI) też mają układy per skórka — wszystko w CSS, na wspólnych klatkach: `.stbl`, `.rec`, `.rank-card`, `.prog-bar`, `.win-badge` oraz kafelkach statystyk, które w JS są div-ami z inline `var(--card)` (stąd selektor `[style*="var(--card)"]`). Terminal: prompt `>` przed wpisem, odznaka jako `[WIN]`, blokowe paski. Brutalizm: wpisy jako pasy na pełną szerokość, 3-pikselowa linia nagłówka tabeli. Rysunek: numeracja wpisów `POZ 01` licznikiem CSS, pełna siatka w tabeli. Dziennik: wpisy bez pudełek, odznaka zwycięzcy jako obrócona czerwona pieczątka, kropkowane separatory wierszy.
+
 Audyt przechodzi czysto dla wszystkich pięciu skórek. Skórka klasyczna ma własne, **wcześniejsze** usterki (`--muted` #685870 na ciemnym tle = 3,11) — nietknięte.
 
 ## Zasady / reguły od użytkownika (nie łam)
