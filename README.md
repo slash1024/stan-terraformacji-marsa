@@ -2,6 +2,14 @@
 
 Aplikacja towarzysząca do gry *Terraformacja Marsa*: losowanie (plansza, kolonie, nagrody, tytuły, korporacje, preludia, pierwszy gracz), zegar rozgrywki, punktacja, historia, statystyki (miesiąc/kwartał/półrocze/rok), konferencje prasowe, raporty AI, motywy i własne kolory.
 
+## Aplikacja online
+
+**https://slash1024.github.io/stan-terraformacji-marsa/**
+
+Instaluje się na telefonie: Android (Chrome) → menu ⋮ → „Zainstaluj aplikację";
+iPhone (Safari) → Udostępnij → „Do ekranu początkowego". Działa offline.
+Wdrożenie i aktualizacje: `DEPLOY.md`.
+
 ## Praca nad projektem
 ```bash
 npm install                      # tylko dla testu (playwright)
