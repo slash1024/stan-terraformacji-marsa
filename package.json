@@ -1,0 +1,16 @@
+{
+  "name": "stan-terraformacji-marsa",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stan Terraformacji Marsa – polska aplikacja towarzysząca do gry planszowej (PWA, jeden plik HTML)",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node build.mjs && node test/smoke.cjs",
+    "serve": "node build.mjs && node tools/serve.mjs 8080",
+    "icons": "node tools/convert-images.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.45.0"
+  }
+}
