@@ -8,6 +8,8 @@ Polskojęzyczna aplikacja towarzysząca do gry planszowej *Terraformacja Marsa*,
   Każdy build dostaje wersję `<package.json version>+<data-godzina>`, wbijaną w `sw.js` i w `<meta name="app-version">`.
 - `npm run serve` → build + `tools/serve.mjs` na `http://localhost:8080` (service worker działa tylko tam i na https)
 - `npm run icons` → przegenerowanie ikon PWA (`tools/make-icons.mjs`, PNG składany ręcznie, zero zależności)
+- **Aplikacja online: https://slash1024.github.io/stan-terraformacji-marsa/** — GitHub Pages z gałęzi `main`, katalog `/docs`.
+  Aktualizacja u ludzi = `npm run build` + commit + push; po ~30 s Pages przebudowuje, użytkownik dostaje pasek „Jest nowa wersja".
 - Wdrożenie i aktualizacje u użytkowników: **DEPLOY.md**
 - `npm test` → build + smoke test w Chromium (wymaga `npm i` i `npx playwright install chromium`)
 - Podgląd: otwórz plik z `docs/` w przeglądarce (albo `npm run serve`)
