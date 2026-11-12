@@ -66,4 +66,8 @@ for (const icon of ['icon-192.webp', 'icon-512.webp', 'icon-maskable-512.webp', 
   copyFileSync(join(root, 'src/icons', icon), join(dist, icon));
 }
 
+// Bez tego GitHub Pages przepuszcza katalog przez Jekylla, który pomija pliki
+// i katalogi zaczynające się od podkreślnika i potrafi zaskoczyć przy rozbudowie.
+writeFileSync(join(dist, '.nojekyll'), '');
+
 console.log('OK -> docs/  wersja', VERSION, '·', (html.length / 1024).toFixed(0) + ' KB');
