@@ -1021,7 +1021,7 @@ function PressConferenceModal(_ref5) {
     src: photoFor(photos, q.player.name),
     name: q.player.name,
     color: pColor,
-    size: 44
+    size: 64
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1,
@@ -1452,7 +1452,7 @@ function PhaseDisplay(_ref0) {
     src: photoFor(photos, playerName),
     name: playerName,
     color: playerColor || "var(--orange)",
-    size: 28
+    size: 40
   }), /*#__PURE__*/React.createElement("span", {
     className: "p-badge-name",
     style: {
@@ -2115,7 +2115,7 @@ function CardSelectionPhase(_ref13) {
     src: photoFor(photos, playerName),
     name: playerName,
     color: playerColor || "var(--orange)",
-    size: 28
+    size: 40
   }), /*#__PURE__*/React.createElement("span", {
     className: "p-badge-name",
     style: {
@@ -3230,7 +3230,7 @@ function ScoreView(_ref17) {
       src: photoFor(photos, p.name),
       name: p.name,
       color: p.color,
-      size: 24
+      size: 34
     }), /*#__PURE__*/React.createElement("input", {
       className: "inp",
       style: {
@@ -4063,7 +4063,7 @@ function MonthView(_ref22) {
       src: photoFor(photos, p.name),
       name: p.name,
       color: p.color || "var(--orange)",
-      size: 30
+      size: 40
     }), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: ".95rem",
@@ -4724,7 +4724,7 @@ function StatsView(_ref27) {
       src: photoFor(photos, p.name),
       name: p.name,
       color: p.color || "var(--orange)",
-      size: 30
+      size: 40
     }), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: ".95rem",
@@ -6036,7 +6036,7 @@ function SettingsView(_ref39) {
       src: photos[p.id],
       name: p.name,
       color: p.color,
-      size: 42
+      size: 56
     })), editing === p.id ? /*#__PURE__*/React.createElement("input", {
       className: "inp",
       style: {
@@ -6406,6 +6406,103 @@ function SettingsView(_ref39) {
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "card-lbl"
+  }, "Wygląd aplikacji"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: ".38rem"
+    }
+  }, [{
+    id: "classic",
+    lbl: "Klasyczny",
+    bg: "#06050a",
+    fg: "#f07030"
+  }, {
+    id: "terminal",
+    lbl: "Terminal",
+    bg: "#04070a",
+    fg: "#5be39a"
+  }, {
+    id: "brutal",
+    lbl: "Brutalizm",
+    bg: "#ffffff",
+    fg: "#ff3b00"
+  }, {
+    id: "karta",
+    lbl: "Karta",
+    bg: "#2a2724",
+    fg: "#ede4d2"
+  }, {
+    id: "rysunek",
+    lbl: "Rysunek",
+    bg: "#0c2a4a",
+    fg: "#8fc4e8"
+  }, {
+    id: "dziennik",
+    lbl: "Dziennik",
+    bg: "#f6f1e6",
+    fg: "#a4321e"
+  }].map(function (s) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: s.id,
+      onClick: function onClick() {
+        setSkin(s.id);
+        SFX.click();
+      },
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: ".25rem",
+        background: "var(--surface)",
+        border: "1px solid " + (skin === s.id ? "var(--orange)" : "var(--border)"),
+        borderRadius: 8,
+        padding: ".35rem .4rem",
+        cursor: "pointer",
+        transition: "all .2s",
+        minWidth: 58
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 40,
+        height: 22,
+        borderRadius: 4,
+        background: s.bg,
+        border: "1px solid var(--border)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 18,
+        height: 3,
+        background: s.fg,
+        borderRadius: 2
+      }
+    })), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: ".46rem",
+        letterSpacing: ".06em",
+        textTransform: "uppercase",
+        color: skin === s.id ? "var(--orange)" : "var(--muted)",
+        whiteSpace: "nowrap"
+      }
+    }, s.lbl));
+  })), skin !== "classic" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: ".58rem",
+      lineHeight: 1.5,
+      color: "var(--muted)",
+      marginTop: ".5rem"
+    }
+  }, "Skórka ma własne kolory — ustawienia kolorów na tej zakładce i motyw w zakładce Backup działają tylko przy wyglądzie klasycznym.")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      marginBottom: ".75rem"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "card-lbl"
   }, "Rozmiar czcionki"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
@@ -6676,103 +6773,6 @@ function SettingsView(_ref39) {
       }
     }, /*#__PURE__*/React.createElement("span", null, preset.lbl));
   })))), tab === "backup" && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "card",
-    style: {
-      marginBottom: ".75rem"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "card-lbl"
-  }, "Wygląd aplikacji"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      flexWrap: "wrap",
-      gap: ".38rem"
-    }
-  }, [{
-    id: "classic",
-    lbl: "Klasyczny",
-    bg: "#06050a",
-    fg: "#f07030"
-  }, {
-    id: "terminal",
-    lbl: "Terminal",
-    bg: "#04070a",
-    fg: "#5be39a"
-  }, {
-    id: "brutal",
-    lbl: "Brutalizm",
-    bg: "#ffffff",
-    fg: "#ff3b00"
-  }, {
-    id: "karta",
-    lbl: "Karta",
-    bg: "#2a2724",
-    fg: "#ede4d2"
-  }, {
-    id: "rysunek",
-    lbl: "Rysunek",
-    bg: "#0c2a4a",
-    fg: "#8fc4e8"
-  }, {
-    id: "dziennik",
-    lbl: "Dziennik",
-    bg: "#f6f1e6",
-    fg: "#a4321e"
-  }].map(function (s) {
-    return /*#__PURE__*/React.createElement("button", {
-      key: s.id,
-      onClick: function onClick() {
-        setSkin(s.id);
-        SFX.click();
-      },
-      style: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: ".25rem",
-        background: "var(--surface)",
-        border: "1px solid " + (skin === s.id ? "var(--orange)" : "var(--border)"),
-        borderRadius: 8,
-        padding: ".35rem .4rem",
-        cursor: "pointer",
-        transition: "all .2s",
-        minWidth: 58
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        width: 40,
-        height: 22,
-        borderRadius: 4,
-        background: s.bg,
-        border: "1px solid var(--border)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        width: 18,
-        height: 3,
-        background: s.fg,
-        borderRadius: 2
-      }
-    })), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: ".46rem",
-        letterSpacing: ".06em",
-        textTransform: "uppercase",
-        color: skin === s.id ? "var(--orange)" : "var(--muted)",
-        whiteSpace: "nowrap"
-      }
-    }, s.lbl));
-  })), skin !== "classic" && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: ".58rem",
-      lineHeight: 1.5,
-      color: "var(--muted)",
-      marginTop: ".5rem"
-    }
-  }, "Skórka ma własne kolory — motyw poniżej działa tylko przy wyglądzie klasycznym.")), /*#__PURE__*/React.createElement("div", {
     className: "card",
     style: {
       marginBottom: ".75rem"
