@@ -42,6 +42,24 @@ function saveData(key, val) {
   return Promise.resolve();
 }
 
+/* Czy trwa partia, której zamknięcie okna by zabolało: wylosowany draft,
+   uruchomiony zegar albo rozpisane punkty. Czytamy z localStorage, bo
+   wywołuje to handler beforeunload, poza drzewem Reacta. */
+function hasUnsavedGame() {
+  try {
+    if (localStorage.getItem("tfm:pendingDraft")) return true;
+    if (localStorage.getItem("tfm:gameStart")) return true;
+    var raw = localStorage.getItem("tfm:scoreDraft");
+    if (raw) {
+      var d = JSON.parse(raw);
+      if (Array.isArray(d) && d.some(function (p) {
+        return p && (p.name || p.tr !== 20 || p.greeneries || p.cities || p.cards || p.milestones || p.awards);
+      })) return true;
+    }
+  } catch (e) {}
+  return false;
+}
+
 // ═══ SOUNDS ═══
 var _audioCtx = null,
   _soundEnabled = true;
@@ -7853,7 +7871,10 @@ var NAV = [{
   lbl: "Ustaw."
 }];
 function App() {
-  var _useState59 = useState("draft"),
+  // Po odświeżeniu w trakcie partii wracamy na punktację, a nie na ekran losowania.
+  var _useState59 = useState(function () {
+      return hasUnsavedGame() ? "score" : "draft";
+    }),
     view = _useState59[0],
     setView = _useState59[1];
   var _useState60 = useState(function () {
@@ -7900,12 +7921,56 @@ function App() {
       localStorage.setItem("tfm:customTheme", ct ? JSON.stringify(ct) : "null");
     } catch (_unused20) {}
   };
-  var _useState61 = useState(null),
+  /* Partia w toku: wylosowany draft i moment startu. Wcześniej żyły wyłącznie
+     w pamięci Reacta. Zapis gry miał zapas — draft spadał na `tfm:lastDraft`,
+     a czas liczył się z `tfm:timerLog` — ale `lastDraft` to „ostatnie losowanie
+     w ogóle", nie „losowanie TEJ partii". Po ponownym losowaniu albo po sesji
+     z innego dnia do gry podpinał się cudzy draft. Teraz partia trzyma swój. */
+  var _useState61 = useState(function () {
+      try {
+        var v = localStorage.getItem("tfm:pendingDraft");
+        return v ? JSON.parse(v) : null;
+      } catch (_unusedPD) {
+        return null;
+      }
+    }),
     pendingDraft = _useState61[0],
     setPendingDraft = _useState61[1];
-  var _useState62 = useState(null),
+  var _useState62 = useState(function () {
+      try {
+        var v = localStorage.getItem("tfm:gameStart");
+        return v ? Number(v) : null;
+      } catch (_unusedGS) {
+        return null;
+      }
+    }),
     gameStartTime = _useState62[0],
     setGameStartTime = _useState62[1];
+  useEffect(function () {
+    try {
+      if (pendingDraft) localStorage.setItem("tfm:pendingDraft", JSON.stringify(pendingDraft));else localStorage.removeItem("tfm:pendingDraft");
+    } catch (_unusedPD2) {}
+  }, [pendingDraft]);
+  useEffect(function () {
+    try {
+      if (gameStartTime) localStorage.setItem("tfm:gameStart", String(gameStartTime));else localStorage.removeItem("tfm:gameStart");
+    } catch (_unusedGS2) {}
+  }, [gameStartTime]);
+  // Ostrzeżenie przed zamknięciem okna w trakcie partii. Przeglądarka pokazuje
+  // własny komunikat — treści nie da się zmienić.
+  useEffect(function () {
+    var onBeforeUnload = function onBeforeUnload(e) {
+      if (window.__tfmAllowReload) return; // przeładowanie po aktualizacji apki
+      if (!hasUnsavedGame()) return;
+      e.preventDefault();
+      e.returnValue = "";
+      return "";
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return function () {
+      window.removeEventListener("beforeunload", onBeforeUnload);
+    };
+  }, []);
   var _useState63 = useState(function () {
       try {
         return localStorage.getItem("tfm:theme") || "dark";

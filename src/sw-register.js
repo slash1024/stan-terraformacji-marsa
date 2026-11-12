@@ -70,6 +70,9 @@
     navigator.serviceWorker.addEventListener('controllerchange', function () {
       if (reloading) return;
       reloading = true;
+      // Flaga dla ostrzeżenia przed zamknięciem: to przeładowanie jest nasze,
+      // nie przypadkowe zamknięcie okna — nie pytaj użytkownika.
+      window.__tfmAllowReload = true;
       location.reload();
     });
   });
